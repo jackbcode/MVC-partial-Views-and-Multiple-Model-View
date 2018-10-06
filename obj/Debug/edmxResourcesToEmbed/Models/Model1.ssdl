@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThamesbankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="DateRangeLapse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LowerDate" Type="datetime" Mode="In" />
+    <Parameter Name="UpperDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="ListHICallOuts_v3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReportType" Type="varchar" Mode="In" />
+    <Parameter Name="LowerDate" Type="datetime" Mode="In" />
+    <Parameter Name="UpperDate" Type="datetime" Mode="In" />
+    <Parameter Name="LowerDateCover" Type="datetime" Mode="In" />
+    <Parameter Name="UpperDateCover" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="ThamesbankModelStoreContainer" />
+</Schema>

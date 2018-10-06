@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ThamesbankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="DateRangeLapseTEST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LowerDate" Type="datetime" Mode="In" />
+          <Parameter Name="UpperDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ListHICallOuts_v3TESTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportType" Type="varchar" Mode="In" />
+          <Parameter Name="LowerDate" Type="datetime" Mode="In" />
+          <Parameter Name="UpperDate" Type="datetime" Mode="In" />
+          <Parameter Name="LowerDateCover" Type="datetime" Mode="In" />
+          <Parameter Name="UpperDateCover" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="ThamesbankModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ThamesbankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ThamesbankEntities10" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="DateRangeLapseTEST" ReturnType="Collection(ThamesbankModel.DateRangeLapseTEST_Result)">
+            <Parameter Name="LowerDate" Mode="In" Type="DateTime" />
+            <Parameter Name="UpperDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ListHICallOuts_v3TESTS" ReturnType="Collection(ThamesbankModel.ListHICallOuts_v3TESTS_Result)">
+            <Parameter Name="ReportType" Mode="In" Type="String" />
+            <Parameter Name="LowerDate" Mode="In" Type="DateTime" />
+            <Parameter Name="UpperDate" Mode="In" Type="DateTime" />
+            <Parameter Name="LowerDateCover" Mode="In" Type="DateTime" />
+            <Parameter Name="UpperDateCover" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="DateRangeLapseTEST_Result">
+          <Property Type="String" Name="RenewalDate" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="43" />
+          <Property Type="DateTime" Name="CallBackDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OutcomeId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListHICallOuts_v3TESTS_Result">
+          <Property Type="String" Name="Quote_Ref" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Premium" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="43" />
+          <Property Type="String" Name="Quote_Source" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Quote_Date" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Cover_Date" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="CallBackDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OutcomeId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ThamesbankModelStoreContainer" CdmEntityContainer="ThamesbankEntities10" >
+          <FunctionImportMapping FunctionImportName="DateRangeLapseTEST" FunctionName="ThamesbankModel.Store.DateRangeLapseTEST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ThamesbankModel.DateRangeLapseTEST_Result">
+                <ScalarProperty Name="RenewalDate" ColumnName="RenewalDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+                <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListHICallOuts_v3TESTS" FunctionName="ThamesbankModel.Store.ListHICallOuts_v3TESTS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ThamesbankModel.ListHICallOuts_v3TESTS_Result">
+                <ScalarProperty Name="Quote_Ref" ColumnName="Quote Ref" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Premium" ColumnName="Premium" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Quote_Source" ColumnName="Quote Source" />
+                <ScalarProperty Name="Quote_Date" ColumnName="Quote Date" />
+                <ScalarProperty Name="Cover_Date" ColumnName="Cover Date" />
+                <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+                <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

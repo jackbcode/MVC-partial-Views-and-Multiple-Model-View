@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Test__Connection.Models.ListHICallOuts_v3TESTS_Result>
+
+<br /><br />
+<table class="table">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Quote_Ref)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premium)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Quote_Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quote_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cover_Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+
+
+    <tr>
+        <td class="refMain">
+            @Html.DisplayFor(modelItem => item.Quote_Ref)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Premium)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Quote_Source)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quote_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cover_Date)
+        </td>
+        <td>
+            @Html.ActionLink("Call", "Index", "CallScreen", new
+       {
+           reference = item.Quote_Ref,
+           name = item.Name,
+           telephone = item.Telephone,
+           premium = item.Premium,
+           quoteSource = item.Quote_Source,
+           quoteDate = item.Quote_Date,
+           coverDate = item.Cover_Date
+       }, new { @class = "btn btn-primary", target = "_blank" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,91 @@
+﻿
+
+@*@model Test__Connection.Models.pr_RenewalListtest_Result
+@{
+    ViewBag.Title = "RetrieveClient";
+}
+
+@{
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<div id="wrapper">
+
+    <div id="dpleft" class="col-sm-6">
+
+        <p id="clientName">@Html.DisplayFor(model => model.ClientName)<p />
+
+
+    </div>
+
+    <div id="dpright" class="col-sm-6">
+
+        @*This needs to call client on new system*@
+
+        @*<input class="btn btn-primary" type="button" id="btndatefilter" value="Call client" />
+
+    </div>
+
+</div>
+
+<br /><br />
+
+<table class="table">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Renewal_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Annual_Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.This_Years_Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alternative_Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claims_Made)
+        </th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Renewal_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Reference)
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Last_Annual_Premium)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.This_Years_Premium)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Alternative_Premium)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Claims_Made)
+        </td>
+
+    </tr>
+
+
+</table>*@*
+
+
+

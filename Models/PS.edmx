@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CallOutcome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reference" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OutcomeId" Type="int" Nullable="false" />
+          <Property Name="OutcomeName" Type="varchar" MaxLength="50" />
+          <Property Name="CallBackDate" Type="datetime" />
+          <Property Name="LastCalled" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CallOutcomeList">
+          <Key>
+            <PropertyRef Name="OutcomeID" />
+          </Key>
+          <Property Name="OutcomeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__CallOutco__Outco__412EB0B6">
+          <End Role="CallOutcomeList" Type="Self.CallOutcomeList" Multiplicity="1" />
+          <End Role="CallOutcome" Type="Self.CallOutcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallOutcomeList">
+              <PropertyRef Name="OutcomeID" />
+            </Principal>
+            <Dependent Role="CallOutcome">
+              <PropertyRef Name="OutcomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="pr_RenewalListtest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LowerDate" Type="datetime" Mode="In" />
+          <Parameter Name="UpperDate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CallOutcome" EntityType="Self.CallOutcome" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallOutcomeList" EntityType="Self.CallOutcomeList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CallOutco__Outco__412EB0B6" Association="Self.FK__CallOutco__Outco__412EB0B6">
+            <End Role="CallOutcomeList" EntitySet="CallOutcomeList" />
+            <End Role="CallOutcome" EntitySet="CallOutcome" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CallOutcome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OutcomeId" Type="Int32" Nullable="false" />
+          <Property Name="OutcomeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CallBackDate" Type="DateTime" Precision="3" />
+          <Property Name="LastCalled" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CallOutcomeList" Relationship="Self.FK__CallOutco__Outco__412EB0B6" FromRole="CallOutcome" ToRole="CallOutcomeList" />
+        </EntityType>
+        <EntityType Name="CallOutcomeList">
+          <Key>
+            <PropertyRef Name="OutcomeID" />
+          </Key>
+          <Property Name="OutcomeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CallOutcomes" Relationship="Self.FK__CallOutco__Outco__412EB0B6" FromRole="CallOutcomeList" ToRole="CallOutcome" />
+        </EntityType>
+        <Association Name="FK__CallOutco__Outco__412EB0B6">
+          <End Role="CallOutcomeList" Type="Self.CallOutcomeList" Multiplicity="1" />
+          <End Role="CallOutcome" Type="Self.CallOutcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallOutcomeList">
+              <PropertyRef Name="OutcomeID" />
+            </Principal>
+            <Dependent Role="CallOutcome">
+              <PropertyRef Name="OutcomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Phone_SystemEntities30" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CallOutcomes" EntityType="Self.CallOutcome" />
+          <EntitySet Name="CallOutcomeLists" EntityType="Self.CallOutcomeList" />
+          <AssociationSet Name="FK__CallOutco__Outco__412EB0B6" Association="Self.FK__CallOutco__Outco__412EB0B6">
+            <End Role="CallOutcomeList" EntitySet="CallOutcomeLists" />
+            <End Role="CallOutcome" EntitySet="CallOutcomes" />
+          </AssociationSet>
+          <FunctionImport Name="pr_RenewalListtest" ReturnType="Collection(Model.pr_RenewalListtest_Result)">
+            <Parameter Name="LowerDate" Mode="In" Type="DateTime" />
+            <Parameter Name="UpperDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="pr_RenewalListtest_Result">
+          <Property Type="String" Name="Renewal_Date" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="43" />
+          <Property Type="Decimal" Name="Last_Annual_Premium" Nullable="true" Precision="8" Scale="2" />
+          <Property Type="Decimal" Name="This_Years_Premium" Nullable="false" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="Alternative_Premium" Nullable="false" Precision="11" Scale="2" />
+          <Property Type="String" Name="Claims_Made" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="CallBackDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OutcomeId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Phone_SystemEntities30">
+          <EntitySetMapping Name="CallOutcomes">
+            <EntityTypeMapping TypeName="Model.CallOutcome">
+              <MappingFragment StoreEntitySet="CallOutcome">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+                <ScalarProperty Name="OutcomeName" ColumnName="OutcomeName" />
+                <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+                <ScalarProperty Name="LastCalled" ColumnName="LastCalled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallOutcomeLists">
+            <EntityTypeMapping TypeName="Model.CallOutcomeList">
+              <MappingFragment StoreEntitySet="CallOutcomeList">
+                <ScalarProperty Name="OutcomeID" ColumnName="OutcomeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pr_RenewalListtest" FunctionName="Model.Store.pr_RenewalListtest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.pr_RenewalListtest_Result">
+                <ScalarProperty Name="Renewal_Date" ColumnName="Renewal Date" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Last_Annual_Premium" ColumnName="Last Annual Premium" />
+                <ScalarProperty Name="This_Years_Premium" ColumnName="This Years Premium" />
+                <ScalarProperty Name="Alternative_Premium" ColumnName="Alternative Premium" />
+                <ScalarProperty Name="Claims_Made" ColumnName="Claims Made" />
+                <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+                <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

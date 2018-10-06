@@ -1,0 +1,195 @@
+﻿@model Test__Connection.Models.CallOutcome
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*@{
+        Layout = "~/Views/Shared/_CustomLayout.cshtml";
+    }*@
+
+<div id="wrapper">
+
+    <div id="dpleft1" class="col-sm-9">
+        <div id="viewBMessagesMain">
+            <div> <p class="mainINFO"> Client Name:</p> <P class="select mainINFO">@ViewBag.name</P></div>
+            <div><p class="mainINFO"> Client Reference:</p><p class="select mainINFO">@ViewBag.reference </p> </div>
+            <div> <p class="mainINFO"> Telephone:</p><P class="select mainINFO">@ViewBag.telephone</P></div>
+            <div> <p class="mainINFO"> Renewal Date: </p><P class="select mainINFO">@ViewBag.renewalDate</P> </div>
+        </div>
+    </div>
+
+
+    @*<div id="dpright1" class="col-sm-3">
+
+        <input class="btn btn-primary btn-lg callClient" btn-lg btn-block type="button" id="btndatefilter" value="Call client" />
+
+    </div>*@
+ </div>
+
+
+<br />
+
+
+<div id="wrapper">
+
+    <div id="dpleft2" class="col-sm-9">
+
+        <div id="viewBMessages">
+
+            <div class="policySection">
+                <div class="headpolicy">Renewals</div>
+                <div class="underlineMain"></div>
+
+                <div><p class="mainINFO"> Last Annual Premium: </p><p class="select2 mainINFO">£@ViewBag.lastAnnualPremium</p> </div>
+                <div> <p class="mainINFO"> This Years Premium: </p> <P class="select2 mainINFO">£@ViewBag.thisYearsPremium</P></div>
+                <div> <p class="mainINFO"> Alternative Premium: </p><P class="select2 mainINFO">£@ViewBag.alternativePremium </P></div>
+                <div> <p class="mainINFO"> Claims Made: </p><P class="select2 mainINFO">@ViewBag.claimsMade</P> </div>
+
+            </div>
+
+            <br />
+
+            <div class="policySection">
+                <div class="headpolicy">Prospects</div>
+                <div class="underlineMain"></div>
+
+                <div><p class="mainINFO"> Premium:</p><p class="select2 mainINFO">@ViewBag.Premium</p> </div>
+                <div> <p class="mainINFO"> Quote Source:</p> <P class="select2 mainINFO">@ViewBag.quoteSource</P></div>
+                <div> <p class="mainINFO"> Quote Date:</p><P class="select2 mainINFO">@ViewBag.quoteDate </P></div>
+                <div> <p class="mainINFO"> Cover Date: </p><P class="select2 mainINFO">@ViewBag.coverDate</P> </div>
+
+            </div>
+
+
+        </div>
+
+        </div>
+
+
+    <div id="dpright2" class="col-sm-3">
+
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <br />
+
+            <div id="callOutcome">Call Outcome</div>
+           <br />
+
+
+            <div class="form-group">
+                <div class="control-label col-md-2 select3"> Outcome</div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.OutcomeId, Model.Outcomes, "Select Outcome", new { @id = "outcomedd", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OutcomeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div id="callDate" style='display:none'>
+                <div class="form-group">
+                    <div class="control-label col-md-2 select3"> Call Back</div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CallBackDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CallBackDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-warning" />
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>
+
+
+    <br />
+
+   
+
+
+
+    <div style='display:none'>
+
+
+
+    </div>
+
+    @*<div id="clientdetails">
+
+        </div>*@
+
+
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+
+    @section Scripts
+{
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script>
+
+
+        $(document).ready(function () {
+
+
+            @*var loaderImage = '<img src="/Content/Images/ajax-loader(1).gif" />'
+            var reference = "@ViewBag.reference"
+                $("#clientdetails").html(loaderImage);
+                $.ajax({
+                   url: "@(Url.Action("RetrieveClient"))",
+                   type: "GET",
+                   data: { "reference": reference },
+                   cache: false,
+                   success: function (data) {
+                    //Fill div with results
+
+                       $("#clientdetails").html(data);
+                   },
+                   error: function (xhr, status, error) {
+                              alert(xhr.responseText);
+                   }
+
+
+               });*@
+
+            $('#outcomedd').on('change', function () {
+
+                if (this.value == "1") {
+                    $("#callDate").show();
+                } else {
+                    $("#callDate").hide();
+                }
+            });
+
+
+         });
+
+            //$("#reset-date").click(function () {
+            //    $('#datepicker-lower').val("").datepicker("update");
+            //    $('#datepicker-upper').val("").datepicker("update");
+            //})
+
+
+
+
+
+
+
+        </script>
+    }

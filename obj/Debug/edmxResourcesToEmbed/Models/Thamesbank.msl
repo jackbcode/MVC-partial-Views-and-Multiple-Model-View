@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ThamesbankModelStoreContainer" CdmEntityContainer="ThamesbankEntities10">
+    <FunctionImportMapping FunctionImportName="DateRangeLapseTEST" FunctionName="ThamesbankModel.Store.DateRangeLapseTEST">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ThamesbankModel.DateRangeLapseTEST_Result">
+          <ScalarProperty Name="RenewalDate" ColumnName="RenewalDate" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+          <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListHICallOuts_v3TESTS" FunctionName="ThamesbankModel.Store.ListHICallOuts_v3TESTS">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ThamesbankModel.ListHICallOuts_v3TESTS_Result">
+          <ScalarProperty Name="Quote_Ref" ColumnName="Quote Ref" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Premium" ColumnName="Premium" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Quote_Source" ColumnName="Quote Source" />
+          <ScalarProperty Name="Quote_Date" ColumnName="Quote Date" />
+          <ScalarProperty Name="Cover_Date" ColumnName="Cover Date" />
+          <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+          <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

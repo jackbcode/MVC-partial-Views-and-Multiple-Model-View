@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Phone_SystemEntities2">
+    <EntitySetMapping Name="CallOutcomes">
+      <EntityTypeMapping TypeName="Model.CallOutcome">
+        <MappingFragment StoreEntitySet="CallOutcome">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="OutcomeID" ColumnName="OutcomeID" />
+          <ScalarProperty Name="CallBackDate" ColumnName="CallBackDate" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="OutcomeName" ColumnName="OutcomeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallOutcomeLists">
+      <EntityTypeMapping TypeName="Model.CallOutcomeList">
+        <MappingFragment StoreEntitySet="CallOutcomeList">
+          <ScalarProperty Name="OutcomeID" ColumnName="OutcomeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="pr_RenewalList" FunctionName="Model.Store.pr_RenewalList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.pr_RenewalList_Result">
+          <ScalarProperty Name="Renewal_Date" ColumnName="Renewal Date" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Last_Annual_Premium" ColumnName="Last Annual Premium" />
+          <ScalarProperty Name="This_Years_Premium" ColumnName="This Years Premium" />
+          <ScalarProperty Name="Alternative_Premium" ColumnName="Alternative Premium" />
+          <ScalarProperty Name="Claims_Made" ColumnName="Claims Made" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

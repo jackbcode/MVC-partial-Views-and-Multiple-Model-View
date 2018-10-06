@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Phone_SystemEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="pr_RenewalList" ReturnType="Collection(Model.pr_RenewalList_Result)">
+      <Parameter Name="LowerDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UpperDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="pr_RenewalList_Result">
+    <Property Type="String" Name="Renewal_Date" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ClientName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Telephone" Nullable="true" MaxLength="43" />
+    <Property Type="Decimal" Name="Last_Annual_Premium" Nullable="true" Precision="8" Scale="2" />
+    <Property Type="Decimal" Name="This_Years_Premium" Nullable="false" Precision="11" Scale="2" />
+    <Property Type="Decimal" Name="Alternative_Premium" Nullable="false" Precision="11" Scale="2" />
+    <Property Type="String" Name="Claims_Made" Nullable="true" MaxLength="20" />
+  </ComplexType>
+</Schema>

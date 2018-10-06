@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CallOutcome">
+    <Key>
+      <PropertyRef Name="OutcomeId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reference" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OutcomeId" Type="int" Nullable="false" />
+    <Property Name="OutcomeName" Type="varchar" MaxLength="50" />
+    <Property Name="CallBackDate" Type="datetime" />
+    <Property Name="LastCalled" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CallOutcomeList">
+    <Key>
+      <PropertyRef Name="OutcomeID" />
+    </Key>
+    <Property Name="OutcomeID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__CallOutco__Outco__412EB0B6">
+    <End Role="CallOutcomeList" Type="Self.CallOutcomeList" Multiplicity="1" />
+    <End Role="CallOutcome" Type="Self.CallOutcome" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CallOutcomeList">
+        <PropertyRef Name="OutcomeID" />
+      </Principal>
+      <Dependent Role="CallOutcome">
+        <PropertyRef Name="OutcomeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="pr_RenewalList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LowerDate" Type="datetime" Mode="In" />
+    <Parameter Name="UpperDate" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="CallOutcome" EntityType="Self.CallOutcome" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallOutcomeList" EntityType="Self.CallOutcomeList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CallOutco__Outco__412EB0B6" Association="Self.FK__CallOutco__Outco__412EB0B6">
+      <End Role="CallOutcomeList" EntitySet="CallOutcomeList" />
+      <End Role="CallOutcome" EntitySet="CallOutcome" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

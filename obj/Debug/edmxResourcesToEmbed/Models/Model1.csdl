@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThamesbankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ThamesbankEntities3" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="DateRangeLapse" ReturnType="Collection(ThamesbankModel.DateRangeLapse_Result)">
+      <Parameter Name="LowerDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UpperDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ListHICallOuts_v3" ReturnType="Collection(ThamesbankModel.ListHICallOuts_v3_Result)">
+      <Parameter Name="ReportType" Mode="In" Type="String" />
+      <Parameter Name="LowerDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UpperDate" Mode="In" Type="DateTime" />
+      <Parameter Name="LowerDateCover" Mode="In" Type="DateTime" />
+      <Parameter Name="UpperDateCover" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="DateRangeLapse_Result">
+    <Property Type="String" Name="RenewalDate" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Telephone" Nullable="true" MaxLength="43" />
+    <Property Type="String" Name="Notes" Nullable="false" MaxLength="42" />
+  </ComplexType>
+  <ComplexType Name="ListHICallOuts_v3_Result">
+    <Property Type="String" Name="Quote_Ref" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Premium" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="Telephone" Nullable="true" MaxLength="43" />
+    <Property Type="String" Name="Quote_Source" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Quote_Date" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Cover_Date" Nullable="true" MaxLength="10" />
+  </ComplexType>
+</Schema>

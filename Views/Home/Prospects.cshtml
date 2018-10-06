@@ -1,0 +1,203 @@
+﻿@*@model IEnumerable<Test__Connection.Models.ListHICallOuts_v3_Result>*@
+
+
+<link href="~/Content/datepicker.css" rel="stylesheet" />
+
+
+
+
+
+<h1>PROSPECTS</h1>
+<div class="underlineMain"></div>
+
+
+
+
+
+
+
+<div id="radioButtons">
+    <label><input id="quoteInput" type="radio" name="prospectsChecked" value="Quote" class="rb">Obtained a Quote</label> &nbsp&nbsp&nbsp
+    <label><input id="coverInput" type="radio" name="prospectsChecked" value="Cover" class="rb">Asked for a Cover Date</label> &nbsp&nbsp&nbsp
+    <label><input id="qCInput" type="radio" name="prospectsChecked" value="QuoteAndCover" class="rb">Obtained a Quote & Asked for a Cover Date</label> &nbsp&nbsp&nbsp
+</div>
+<br /> 
+
+
+
+
+<div id="quote" style='display:none' class="divDates">
+
+    <h4>Quote Between</h4>
+
+    <p>Enter Start Date:   <input class=" form-control text-box single-line " data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-lower" name="Date" type="date" value="">
+    <p>Enter End Date:   <input class=" form-control text-box single-line " data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-upper" name="Date" type="date" value="">
+        <br />
+
+</div>
+
+<div id="cover" style='display:none' class="divDates">
+
+    <h4>Cover Date Between</h4>
+
+    <p>Enter Start Date:   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-lowercover" name="Date" type="date" value="">
+    <p>
+        Enter End Date:   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-uppercover" name="Date" type="date" value="">
+        <br />
+
+</div>
+
+<div id="quoteandcover" style='display:none'>
+
+    <div id="wrapper">
+
+        <div id="dpleft">
+            <h4>Quote Between</h4>
+
+            <p>Enter Start Date:   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-qandclower" name="Date" type="date" value="">
+            <p>
+                Enter End Date:   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-qandcupper" name="Date" type="date" value="">
+        </div>
+
+        <div id="dpright">
+            <h4>Cover Date Between</h4>
+
+            <p>Enter Start Date:   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-lowerCover" name="Date" type="date" value="">
+            <p>
+                Enter End Date:   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-upperCover" name="Date" type="date" value="">
+                <br />
+        </div>
+    </div>
+</div>
+
+<input class="btn btn-success" type="button" id="btndatefilter" value="Submit" />
+@*<input class="btn btn-success" type="button" id="reset-date" value="Reset" />*@
+
+
+
+
+
+
+<br />
+<div id="newList">
+
+</div>
+
+
+
+
+
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+
+
+    <script>
+
+        
+
+        $(document).ready(function () {
+
+            $('input[type ="radio"]').click(function () {
+
+
+                if ($(this).attr('id') == 'quoteInput') {
+                    $('#quote').show();
+                }
+
+                else {
+                    $('#quote').hide();
+                }
+
+                if ($(this).attr('id') == 'coverInput') {
+                    $('#cover').show();
+                }
+
+                else {
+                    $('#cover').hide();
+                }
+
+                if ($(this).attr('id') == 'qCInput') {
+                        $('#quoteandcover').show();
+                 }
+
+                else {
+                        $('#quoteandcover').hide();
+                }
+
+            });
+
+           
+
+
+
+            $("#btndatefilter").click(function () {
+                var quotesChecked = $("input[name='prospectsChecked']:checked").val();
+                var loaderImage = '<img id = "ajax" src="/Content/Images/ajax-loader(1).gif" />'
+                //var startdate = $('#datepicker-lower').val();
+                //var enddate = $('#datepicker-upper').val();
+
+
+                var secondStartdate = null
+                var secondEnddate = null
+
+                debugger
+
+                if (quotesChecked == "QuoteAndCover") {
+
+                    var startdate = $('#datepicker-qandclower').val();
+                    var enddate = $('#datepicker-qandcupper').val();
+                    var secondStartdate = $('#datepicker-lowerCover').val();
+                    var secondEnddate = $('#datepicker-upperCover').val();
+                }
+
+                else if (quotesChecked == "Quote") {
+
+                    var startdate = $('#datepicker-lower').val();
+                    var enddate = $('#datepicker-upper').val();
+                }
+
+                else {
+
+                    var startdate = $('#datepicker-lowercover').val();
+                    var enddate = $('#datepicker-uppercover').val();
+                }
+
+
+                debugger
+
+                $("#newList").html(loaderImage);
+                debugger
+                $.ajax({
+                   url: "@(Url.Action("ProspectsReturned"))",
+                    type: "GET",
+                    data: { 'Lowerdate': startdate, 'Upperdate': enddate, 'radioValue': quotesChecked, 'lowerdatecover': secondStartdate, 'upperdatecover': secondEnddate },
+                   cache: false,
+                   success: function (data) {
+                    //Fill div with results
+
+                       $("#newList").html(data);
+                   },
+                   error: function (xhr, status, error) {
+                              alert(xhr.responseText);
+                   }
+
+                });
+
+                debugger
+                
+            });
+
+           
+
+        });
+
+
+
+    </script>
+}
+

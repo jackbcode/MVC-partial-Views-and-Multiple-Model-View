@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Test__Connection.Models.pr_RenewalListtest_Result>
+
+@{
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+
+
+
+<table class="table">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Renewal_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Annual_Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.This_Years_Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alternative_Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claims_Made)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Renewal_Date)
+        </td>
+        <td class="refMain">
+            @Html.DisplayFor(modelItem => item.Reference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>*@
+        <td>
+            £@Html.DisplayFor(modelItem => item.Last_Annual_Premium)
+        </td>
+        <td>
+            £@Html.DisplayFor(modelItem => item.This_Years_Premium)
+        </td>
+        <td>
+            £@Html.DisplayFor(modelItem => item.Alternative_Premium)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claims_Made)
+        </td>
+    
+
+        <td>
+
+            @Html.ActionLink("Call", "Index", "CallScreen", new
+       {
+           reference = item.Reference,
+           renewalDate = item.Renewal_Date,
+           name = item.ClientName,
+           telephone = item.Telephone,
+           lastAnnualPremium = item.Last_Annual_Premium,
+           thisYearsPremium = item.This_Years_Premium,
+           alternativePremium = item.Alternative_Premium,
+           claimsMade = item.Claims_Made
+       }, new { @class = "btn btn-primary" , target = "_blank" })
+        </td>
+
+    </tr>
+    }
+
+</table>
+

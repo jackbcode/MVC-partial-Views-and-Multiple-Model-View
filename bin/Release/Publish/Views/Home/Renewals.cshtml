@@ -1,0 +1,82 @@
+﻿
+
+
+<h1> RENEWALS</h1>
+<div class="underlineMain"></div>
+<br />
+
+
+
+<form>
+
+    <h4>Enter Start Date:   </h4><input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-lower" name="Date" type="date" value="">
+   <h4> Enter End Date:     </h4>   <input class="form-control text-box single-line" data-val="true" data-val-date="The field Aggregate Date must be a date." data-val-required="The Aggregate Date field is required." id="datepicker-upper" name="Date" type="date" value="">
+
+        <br />
+
+        <input class="btn btn-success" type="button" id="btndatefilter" value="Submit" />
+        @*<button class="btn btn-success" id="reset-date">Reset</button>*@
+
+
+
+</form>
+
+<br /><br />
+
+<div id="newList">
+
+</div>
+
+
+
+
+
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+
+
+
+        $(document).ready(function () {
+            $("#btndatefilter").click(function () {
+                var startdate = $('#datepicker-lower').val();
+                var enddate = $('#datepicker-upper').val();
+                debugger
+                var loaderImage = '<img src="/Content/Images/ajax-loader(1).gif" id="ajaxLoader" />'
+                $("#newList").html(loaderImage);
+                $.ajax({
+                   url: "@(Url.Action("RenewalsReturned"))",
+                   type: "GET",
+                   data: { 'Lowerdate': startdate, 'Upperdate': enddate },
+                   cache: false,
+                   success: function (data) {
+                    //Fill div with results
+
+                       $("#newList").html(data);
+                   },
+                   error: function (xhr, status, error) {
+                              alert(xhr.responseText);
+                   }
+
+
+                });
+
+
+
+                //$("#reset-date").click(function () {
+                //    $('#datepicker-lower').val("").datepicker("update");
+                //    $('#datepicker-upper').val("").datepicker("update");
+                //})
+
+            });
+
+
+        });
+
+
+
+    </script>
+}
+
